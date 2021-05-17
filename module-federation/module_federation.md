@@ -15,11 +15,10 @@ This tutorial shows how to use Webpack Module Federation together with the Angul
 
 In this part you will clone the microfrontend starterkit and inspect its projects.
 
-1. Go to subdirectory and install the dependencies:
+1. Install the dependencies:
 
     ```
-    cd module-federation
-    yarn | npm i
+    yarn / npm i
     ```
 
 2. Start the shell (``ng serve shell -o``) and inspect it a bit:
@@ -75,12 +74,10 @@ Now, let's activate and configure module federation:
                     './Module': './projects/mfe1/src/app/flights/flights.module.ts',
                 },        
                 shared: {
-                  '@angular/core': { singleton: true, strictVersion: true },
-                  '@angular/common': { singleton: true, strictVersion: true },
-                  '@angular/common/http': { singleton: true, strictVersion: true },
-                  '@angular/router': { singleton: true, strictVersion: true },
-          
-                  ...sharedMappings.getDescriptors()
+                    "@angular/core": { singleton: true, strictVersion: true },
+                    "@angular/common": { singleton: true, strictVersion: true },
+                    "@angular/router": { singleton: true, strictVersion: true },
+                    [...]
                 }
             }),
             [...]
@@ -112,12 +109,10 @@ Now, let's activate and configure module federation:
                     'mfe1': "mfe1@http://localhost:3000/remoteEntry.js"
                 },
                 shared: {
-                    '@angular/core': { singleton: true, strictVersion: true },
-                    '@angular/common': { singleton: true, strictVersion: true },
-                    '@angular/common/http': { singleton: true, strictVersion: true },
-                    '@angular/router': { singleton: true, strictVersion: true },
-
-                    ...sharedMappings.getDescriptors()
+                    "@angular/core": { singleton: true, strictVersion: true },
+                    "@angular/common": { singleton: true, strictVersion: true },
+                    "@angular/router": { singleton: true, strictVersion: true },
+                    [...]
                 }
             }),
             [...]
@@ -222,9 +217,7 @@ This was quite easy, wasn't it? However, we can improve this solution a bit. Ide
     .catch(err => console.error(err));
     ```
 
-    Please make sure the import was added.
-
-2. Open the file ``app.routes.ts`` and comment out (or remove) the property ``remoteEntry``:
+1. Open the file ``app.routes.ts`` and comment out (or remove) the property ``remoteEntry``:
 
     ```typescript
     import { loadRemoteModule } from '@angular-architects/module-federation';
@@ -246,27 +239,19 @@ This was quite easy, wasn't it? However, we can improve this solution a bit. Ide
     ]
     ```
 
-    Please again make sure the import was added.  
+2. You may need to restart both, the ``shell`` and the micro frontend (``mfe1``).
 
-3. You may need to restart both, the ``shell`` and the micro frontend (``mfe1``).
-
-4. The shell should still be able to load the micro frontend.
+3. The shell should still be able to load the micro frontend.
 
 ## Bonus: Share a Library of Your Monorepo
 
-1. Before you start make sure you've added `"@angular-architects/module-federation": "^12.2.1"` to your devDependencies:
-
-    ```
-    yarn add -D @angular-architects/module-federation | npm i --save @angular-architects/module-federation
-    ```
-
-3. Add a library to your monorepo:
+1. Add a library to your monorepo:
 
     ```
     ng g lib auth-lib
     ```
 
-4. In your ``tsconfig.json`` in the project's root, adjust the path mapping for ``auth-lib`` so that it points to the libs entry point:
+2. In your ``tsconfig.json`` in the project's root, adjust the path mapping for ``auth-lib`` so that it points to the libs entry point:
 
     ```json
     "auth-lib": [
@@ -274,9 +259,9 @@ This was quite easy, wasn't it? However, we can improve this solution a bit. Ide
     ]
     ```
 
-5. As most IDEs only read global configuration files like the ``tsconfig.json`` once, restart your IDE (Alternatively, your IDE might also provide an option for reloading these settings).
+3. As most IDEs only read global configuration files like the ``tsconfig.json`` once, restart your IDE (Alternatively, your IDE might also provide an option for reloading these settings).
 
-6. Open the ``shell``'s ``webpack.config.js`` and register the created ``auth-lib`` with the ``sharedMappings``:
+4. Open the ``shell``'s ``webpack.config.js`` and register the created ``auth-lib`` with the ``sharedMappings``:
 
     ```typescript
     const sharedMappings = new mf.SharedMappings();
@@ -286,9 +271,9 @@ This was quite easy, wasn't it? However, we can improve this solution a bit. Ide
     );
     ```
 
-7. Also open the micro frontends (``mfe1``) ``webpack.config.js`` and do the same.
+5. Also open the micro frontends (``mfe1``) ``webpack.config.js`` and do the same.
 
-8. Switch to your ``auth-lib`` project and open the file ``auth-lib.service.ts``. Adjust it as follows:
+6. Switch to your ``auth-lib`` project and open the file ``auth-lib.service.ts``. Adjust it as follows:
 
     ```typescript
     @Injectable({
@@ -312,7 +297,7 @@ This was quite easy, wasn't it? However, we can improve this solution a bit. Ide
     }
     ```
 
-9. Switch to your ``shell`` project and open its ``app.component.ts``. Use the shared ``AuthLibService`` to login a user:
+7. Switch to your ``shell`` project and open its ``app.component.ts``. Use the shared ``AuthLibService`` to login a user:
 
     ```typescript
     import { AuthLibService } from 'auth-lib';
@@ -325,39 +310,39 @@ This was quite easy, wasn't it? However, we can improve this solution a bit. Ide
         title = 'shell';
 
         constructor(private authLibService: AuthLibService) {
-            this.authLibService.login('Alex', null);
+            this.authLibService.login('Javier', null);
         }
 
     }
     ```
 
-10. Switch to your ``mfe1`` project and open its ``flights-search.component.ts``. Use the shared service to retrieve the current user's name:
+8. Switch to your ``mfe1`` project and open its ``flights-search.component.ts``. Use the shared service to retrieve the current user's name:
 
-     ```typescript
-     export class FlightsSearchComponent {
+    ```typescript
+    export class FlightsSearchComponent {
 
-         [...]
+        [...]
 
-         user = this.authLibService.user;
+        user = this.authLibService.user;
 
-         constructor(private authLibService: AuthLibService, [...]) { }
+        constructor(private authLibService: AuthLibService, [...]) { }
 
-         [...]
-     }
-     ```
+        [...]
+    }
+    ```
 
-11. Open this component's template(``flights-search.component.html``) and data bind the property ``user``:
+9. Open this component's template(``flights-search.component.html``) and data bind the property ``user``:
 
-     ```html
-     <div id="container">
-         <div>Hi {{user}}!</div>
-         [...]
-     </div>
+    ```html
+    <div id="container">
+        <div>{{user}}</div>
+        [...]
+    </div>
 	```
 
-12. You may need to restart both, the ``shell`` and the micro frontend (``mfe1``).
+10. You may need to restart both, the ``shell`` and the micro frontend (``mfe1``).
 
-13. In the shell, navigate to the micro frontend. If it shows the same user name, the library is shared.
+11. In the shell, navigate to the micro frontend. If it shows the same user name, the library is shared.
 
 
 ## More Details on Module Federation
