@@ -11,7 +11,8 @@ import { catchError, debounceTime, distinctUntilChanged, filter, map, startWith,
   styleUrls: ['./flight-lookahead.component.css']
 })
 export class FlightLookaheadComponent implements OnInit {
-  control: FormControl;
+  fromControl: FormControl;
+  toControl: FormControl;
   flights$: Observable<Flight[]>;
   loading: boolean;
 
@@ -21,11 +22,18 @@ export class FlightLookaheadComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.control = new FormControl();
-    const input$ = this.control.valueChanges.pipe(
+    this.fromControl = new FormControl();
+    const fromInput$ = this.fromControl.valueChanges.pipe(
       debounceTime(300),
       // filter((input) => input.length > 2),
-      distinctUntilChanged((x, y) => x === y)
+      distinctUntilChanged()
+    );
+
+    this.toControl = new FormControl();
+    const toInput$ = this.toControl.valueChanges.pipe(
+      debounceTime(300),
+      // filter((input) => input.length > 2),
+      distinctUntilChanged()
     );
 
     this.online$ = interval(2000).pipe(
@@ -35,11 +43,11 @@ export class FlightLookaheadComponent implements OnInit {
       tap((value) => (this.online = value))
     );
 
-    this.flights$ = combineLatest([input$, this.online$]).pipe(
-      filter(([_, online]) => online),
-      map(([input, _]) => input),
-      tap((input) => (this.loading = true)),
-      switchMap((input) => this.load(input)),
+    this.flights$ = combineLatest([fromInput$, toInput$, this.online$]).pipe(
+      filter(([f, t, online]) => (f || t) && online),
+      map(([from, to, _]) => [from, to]),
+      tap(([from, to]) => (this.loading = true)),
+      switchMap(([from, to]) => this.load(from, to)),
       tap((v) => (this.loading = false))
     );
 
@@ -53,10 +61,10 @@ export class FlightLookaheadComponent implements OnInit {
     );*/
   }
 
-  load(from: string): Observable<Flight[]> {
+  load(from: string, to?: string): Observable<Flight[]> {
     const url = 'http://www.angular.at/api/flight';
 
-    const params = new HttpParams().set('from', from);
+    const params = new HttpParams().set('from', from).set('to', to);
 
     const headers = new HttpHeaders().set('Accept', 'application/json');
 
