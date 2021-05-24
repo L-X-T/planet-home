@@ -2,6 +2,23 @@
 # yarn lockfile v1
 
 
+"@angular-architects/module-federation-runtime@^12.1.1":
+  version "12.1.1"
+  resolved "https://registry.yarnpkg.com/@angular-architects/module-federation-runtime/-/module-federation-runtime-12.1.1.tgz#1bda7a9da12e040cbdf3282db71cccb6e6f5dc9e"
+  integrity sha512-i5SNEjlbN3tyG2xNjcFgLt+MtEVMle+1NgXc5tITtRsKg5fzXx5uEeSRzv72XJQSagDUtQhndCziabWAWaHH+Q==
+  dependencies:
+    tslib "^2.0.0"
+
+"@angular-architects/module-federation@12.1.1":
+  version "12.1.1"
+  resolved "https://registry.yarnpkg.com/@angular-architects/module-federation/-/module-federation-12.1.1.tgz#d416a2efceea646f0c28da0f6ceaa365352f725b"
+  integrity sha512-OksGF5U/exk410QYHIKRMS3pFvTQXhFOct3r4BCzRpDMGl1305sOoGhNERjXJqbZENI9CdhGCdYKomF9+feQMQ==
+  dependencies:
+    "@angular-architects/module-federation-runtime" "^12.1.1"
+    ngx-build-plus "^12.0.0"
+    rxjs "~6.6.3"
+    word-wrap "^1.2.3"
+
 "@angular-devkit/architect@0.1200.0":
   version "0.1200.0"
   resolved "https://registry.yarnpkg.com/@angular-devkit/architect/-/architect-0.1200.0.tgz#1a53d18901882c73ef0bc79a64cbbc8ca9b82a54"
@@ -131,12 +148,33 @@
     rxjs "6.6.7"
     source-map "0.7.3"
 
+"@angular-devkit/core@12.0.1":
+  version "12.0.1"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-12.0.1.tgz#e1b1cbd18605ee752d0e44bc1096ad30de86c5bc"
+  integrity sha512-y0+pK7XfQyf962oKR5LmVkfuPEnwntpmVmneqt+q8Q/ZDHm9Tzh0PGyXKxhHjlWbq7btbWPiYkB4ELDtmfn92Q==
+  dependencies:
+    ajv "8.2.0"
+    ajv-formats "2.0.2"
+    fast-json-stable-stringify "2.1.0"
+    magic-string "0.25.7"
+    rxjs "6.6.7"
+    source-map "0.7.3"
+
 "@angular-devkit/schematics@12.0.0":
   version "12.0.0"
   resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-12.0.0.tgz#d46fa41d8968b64b6234f828fc16a227630fe621"
   integrity sha512-xp6b8QF+MYT3kXEDo6MFRQRDGkFxAHBdBCo2wdo8qvoNHIr+8XYZwDEb8z0SbzzJmXFbDXk1vmavcNSd6+uLXg==
   dependencies:
     "@angular-devkit/core" "12.0.0"
+    ora "5.4.0"
+    rxjs "6.6.7"
+
+"@angular-devkit/schematics@12.0.1":
+  version "12.0.1"
+  resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-12.0.1.tgz#58c7e0d585f9b20093f34870cf1e3599863dc503"
+  integrity sha512-ko44lDx4n+NHdyU+/yH5pAnxPa+uaqyt9VwdkVCekQvML94dWtvRZejcyuEgPZf+gqkpBQs3VxK0Tm/azabVZg==
+  dependencies:
+    "@angular-devkit/core" "12.0.1"
     ora "5.4.0"
     rxjs "6.6.7"
 
@@ -1339,6 +1377,15 @@
   dependencies:
     "@angular-devkit/core" "12.0.0"
     "@angular-devkit/schematics" "12.0.0"
+    jsonc-parser "3.0.0"
+
+"@schematics/angular@^12.0.0":
+  version "12.0.1"
+  resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-12.0.1.tgz#0a816d3b65f6a6e0b0afc9932e7c27b81e3a0d94"
+  integrity sha512-kCkdrCCHoa01aZrSBRLK/sZCG5Xvnyd6/srRhVaP61vu9YQ0g/Z786CTFYbo9ujoJGewPkN0O1sbNYKldcLi4w==
+  dependencies:
+    "@angular-devkit/core" "12.0.1"
+    "@angular-devkit/schematics" "12.0.1"
     jsonc-parser "3.0.0"
 
 "@tootallnate/once@1":
@@ -5791,6 +5838,14 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
+ngx-build-plus@^12.0.0:
+  version "12.0.1"
+  resolved "https://registry.yarnpkg.com/ngx-build-plus/-/ngx-build-plus-12.0.1.tgz#3cd5da9fd91d6fdc1d86ab6c7c5bef5c24c2ae78"
+  integrity sha512-eq4D66yK3iEWuGKn/0Mh0CEfO8zzc17ZZLMpN/tFIcDEcGwFCHs8absQRAc90kBNsxIXQxPqjxUDXdISfFKGRw==
+  dependencies:
+    "@schematics/angular" "^12.0.0"
+    webpack-merge "^5.0.0"
+
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
@@ -7528,7 +7583,7 @@ rxjs@6.6.2:
   dependencies:
     tslib "^1.9.0"
 
-rxjs@6.6.7, rxjs@^6.4.0, rxjs@^6.5.2, rxjs@^6.5.3, rxjs@^6.5.4, rxjs@^6.6.6, rxjs@~6.6.0:
+rxjs@6.6.7, rxjs@^6.4.0, rxjs@^6.5.2, rxjs@^6.5.3, rxjs@^6.5.4, rxjs@^6.6.6, rxjs@~6.6.0, rxjs@~6.6.3:
   version "6.6.7"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.6.7.tgz#90ac018acabf491bf65044235d5863c4dab804c9"
   integrity sha512-hTdwr+7yYNIT5n4AMYp85KA6yw2Va0FLa3Rguvbpa4W3I5xynaBZo41cM3XM+4Q6fRMj3sBYIR1VAmZMXYJvRQ==
@@ -8877,7 +8932,7 @@ webpack-log@^2.0.0:
     ansi-colors "^3.0.0"
     uuid "^3.3.2"
 
-webpack-merge@5.7.3:
+webpack-merge@5.7.3, webpack-merge@^5.0.0:
   version "5.7.3"
   resolved "https://registry.yarnpkg.com/webpack-merge/-/webpack-merge-5.7.3.tgz#2a0754e1877a25a8bbab3d2475ca70a052708213"
   integrity sha512-6/JUQv0ELQ1igjGDzHkXbVDRxkfA57Zw7PfiupdLFJYrgFqY5ZP8xxbpp2lU3EPwYx89ht5Z/aDkD40hFCm5AA==
@@ -8999,6 +9054,11 @@ wildcard@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/wildcard/-/wildcard-2.0.0.tgz#a77d20e5200c6faaac979e4b3aadc7b3dd7f8fec"
   integrity sha512-JcKqAHLPxcdb9KM49dufGXn2x3ssnfjbcaQdLlfZsL9rH9wgDQjUtDxbo8NE0F6SFvydeu1VhZe7hZuHsB2/pw==
+
+word-wrap@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/word-wrap/-/word-wrap-1.2.3.tgz#610636f6b1f703891bd34771ccb17fb93b47079c"
+  integrity sha512-Hz/mrNwitNRh/HUAtM/VT/5VH+ygD6DV7mYKZAtHOrbs8U7lvPS6xf7EJKMF0uW1KJCl0H701g3ZGus+muE5vQ==
 
 wrap-ansi@^5.1.0:
   version "5.1.0"
