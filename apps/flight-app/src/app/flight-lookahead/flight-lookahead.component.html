@@ -12,6 +12,7 @@
 
     <div *ngIf="loading">Loading ...</div>
 
+    <div [ngStyle]="{ 'background-color' : online ? 'green' : 'red' }">Online: {{ online }}</div>
   </div>
 </div>
 
