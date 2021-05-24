@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { combineLatest, interval, Observable, of } from 'rxjs';
 import { Flight } from '@flight-workspace/flight-lib';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { catchError, debounceTime, distinctUntilChanged, filter, map, startWith, switchMap, tap } from 'rxjs/operators';
+import { catchError, debounceTime, delay, distinctUntilChanged, filter, map, retry, startWith, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'flight-workspace-flight-lookahead',
@@ -38,7 +38,7 @@ export class FlightLookaheadComponent implements OnInit {
 
     this.online$ = interval(2000).pipe(
       startWith(0),
-      map((_) => Math.random() < 0.5),
+      map((_) => true),
       distinctUntilChanged(),
       tap((value) => (this.online = value))
     );
@@ -48,6 +48,8 @@ export class FlightLookaheadComponent implements OnInit {
       map(([from, to, _]) => [from, to]),
       tap(([from, to]) => (this.loading = true)),
       switchMap(([from, to]) => this.load(from, to)),
+      retry(3), // you retry 3 times
+      catchError((err) => of([])), // if all fail catch error
       tap((v) => (this.loading = false))
     );
 
