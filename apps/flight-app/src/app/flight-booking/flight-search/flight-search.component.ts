@@ -7,6 +7,7 @@ import { FlightBookingAppState } from '../+state/flight-booking.reducer';
 import { loadFlightBookings, updateFlight } from '../+state/flight-booking.actions';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { selectFlightBookingState } from '../+state/flight-booking.selectors';
 
 @Component({
   selector: 'flight-search',
@@ -32,7 +33,7 @@ export class FlightSearchComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.flights$ = this.store.select((s) => s.flightBooking.flights);
+    this.flights$ = this.store.select(selectFlightBookingState);
   }
 
   search(): void {
