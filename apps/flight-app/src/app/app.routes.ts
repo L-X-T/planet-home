@@ -1,6 +1,7 @@
 import { ExtraOptions, Routes } from '@angular/router';
 import { BasketComponent } from './basket/basket.component';
 import { HomeComponent } from './home/home.component';
+import { FlightLookaheadComponent } from './flight-lookahead/flight-lookahead.component';
 
 export const APP_ROUTES: Routes = [
   {
@@ -11,6 +12,10 @@ export const APP_ROUTES: Routes = [
   {
     path: 'home',
     component: HomeComponent
+  },
+  {
+    path: 'flight-lookahead',
+    component: FlightLookaheadComponent
   },
   {
     path: 'basket',
