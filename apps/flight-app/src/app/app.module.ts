@@ -15,6 +15,8 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SharedModule } from './shared/shared.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
+import { LoggerModule } from '@flight-workspace/logger-lib';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -26,7 +28,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 
     FlightLibModule.forRoot(),
     SharedModule.forRoot(),
-    RouterModule.forRoot(APP_ROUTES, { relativeLinkResolution: 'legacy' })
+    RouterModule.forRoot(APP_ROUTES, { relativeLinkResolution: 'legacy' }),
+
+    LoggerModule.forRoot({ enableDebug: true })
   ],
   declarations: [AppComponent, SidebarComponent, NavbarComponent, HomeComponent, BasketComponent],
   providers: [],
