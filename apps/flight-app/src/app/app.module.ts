@@ -16,6 +16,7 @@ import { SharedModule } from './shared/shared.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
 
 import { LoggerModule } from '@flight-workspace/logger-lib';
+import { CustomLogFormatterService } from './shared/custom-log-formatter.service';
 
 @NgModule({
   imports: [
@@ -30,7 +31,7 @@ import { LoggerModule } from '@flight-workspace/logger-lib';
     SharedModule.forRoot(),
     RouterModule.forRoot(APP_ROUTES, { relativeLinkResolution: 'legacy' }),
 
-    LoggerModule.forRoot({ enableDebug: true })
+    LoggerModule.forRoot({ enableDebug: true, logFormatterType: CustomLogFormatterService })
   ],
   declarations: [AppComponent, SidebarComponent, NavbarComponent, HomeComponent, BasketComponent],
   providers: [],
