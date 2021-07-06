@@ -8,4 +8,10 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 export class HomeComponent {
   value1 = true;
+
+  changed(event: Event): void {
+    // eslint-disable-next-line no-restricted-syntax
+    console.debug('event', event);
+    this.value1 = event['detail'];
+  }
 }
