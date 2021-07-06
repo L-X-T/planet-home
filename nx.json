@@ -29,7 +29,7 @@
     "flight-app": { "tags": ["domain:flights"] },
     "flight-admin": { "tags": ["domain:flights"] },
     "flight-lib": { "tags": ["domain:flights", "type:domain-logic"] },
-    "logger-lib": { "tags": ["domain:shared"] },
+    "logger-lib": { "tags": ["domain:shared", "type:util"] },
     "dashboard": { "tags": ["domain:dashboard"] },
     "dashboard-lib": { "tags": ["domain:dashboard", "type:domain-logic"] },
     "external": { "tags": ["domain:external"] },
