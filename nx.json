@@ -37,6 +37,7 @@
     "luggage": { "tags": ["domain:luggage", "type:app"] },
     "luggage-e2e": { "tags": [], "implicitDependencies": ["luggage"] },
     "luggage-feature-checkin": { "tags": ["domain:luggage", "type:feature"] },
-    "luggage-feature-report-loss": { "tags": ["domain:luggage", "type:feature"] }
+    "luggage-feature-report-loss": { "tags": ["domain:luggage", "type:feature"] },
+    "luggage-ui-card": { "tags": ["domain:luggage", "type:ui"] }
   }
 }
