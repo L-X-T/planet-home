@@ -102,9 +102,11 @@ As you see in this URL, the API takes an parameter for filtering flights with re
 
 7.	Switch back to your new component and add the following properties:
 
-    - control: FormControl
-    - flights$: Observable<Flight[]>
-    - loading: boolean
+    ```TypeScript
+    control: FormControl;
+    flights$: Observable<Flight[]>;
+    loading: boolean;
+   ```
 
 8. Inject the ``HttpClient`` into its constructor.
 
