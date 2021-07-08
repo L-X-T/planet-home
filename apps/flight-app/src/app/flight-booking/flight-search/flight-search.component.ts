@@ -2,6 +2,12 @@
 /* eslint-disable @angular-eslint/no-empty-lifecycle-method */
 import { Component, OnInit } from '@angular/core';
 import { Flight, FlightService } from '@flight-workspace/flight-lib';
+import { Store } from '@ngrx/store';
+import { FlightBookingAppState } from '../+state/flight-booking.reducer';
+import { loadFlightBookings, loadFlights, updateFlight } from '../+state/flight-booking.actions';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { selectFlightBookingState } from '../+state/flight-booking.selectors';
 
 @Component({
   selector: 'flight-search',
@@ -18,21 +24,52 @@ export class FlightSearchComponent implements OnInit {
     5: true
   };
 
-  constructor(private flightService: FlightService) {}
+  flights$: Observable<Flight[]>;
+
+  constructor(private flightService: FlightService, private store: Store<FlightBookingAppState>) {}
 
   get flights(): Flight[] {
     return this.flightService.flights;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.flights$ = this.store.select(selectFlightBookingState);
+  }
 
   search(): void {
     if (!this.from || !this.to) return;
 
-    this.flightService.load(this.from, this.to, this.urgent);
+    // this.flightService.load(this.from, this.to, this.urgent);
+
+    /*this.flightService.find(this.from, this.to, this.urgent).subscribe(
+      (flights) => {
+        this.store.dispatch(loadFlightBookings({ flights }));
+      },
+      (error) => {
+        console.error('error', error);
+      }
+    );*/
+
+    this.store.dispatch(
+      loadFlights({
+        from: this.from,
+        to: this.to,
+        urgent: this.urgent
+      })
+    );
   }
 
   delay(): void {
-    this.flightService.delay();
+    // this.flightService.delay();
+
+    this.flights$.pipe(take(1)).subscribe((flights) => {
+      const flight = flights[0];
+
+      const oldDate = new Date(flight.date);
+      const newDate = new Date(oldDate.getTime() + 15 * 60 * 1000);
+      const newFlight = { ...flight, date: newDate.toISOString() };
+
+      this.store.dispatch(updateFlight({ flight: newFlight }));
+    });
   }
 }
