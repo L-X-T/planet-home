@@ -3,13 +3,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule } from '@angular/router';
+import { PreloadAllModules, RouterModule } from '@angular/router';
 import { FlightLibModule } from '@flight-workspace/flight-lib';
 
 import { AppComponent } from './app.component';
 import { APP_ROUTES } from './app.routes';
 import { BasketComponent } from './basket/basket.component';
-import { FlightBookingModule } from './flight-booking/flight-booking.module';
+// import { FlightBookingModule } from './flight-booking/flight-booking.module'; // lazy-loaded
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SharedModule } from './shared/shared.module';
@@ -35,12 +35,15 @@ import { RouterState, StoreRouterConnectingModule } from '@ngrx/router-store';
     BrowserAnimationsModule,
     ReactiveFormsModule,
 
-    FlightBookingModule,
+    // FlightBookingModule, // lazy-loaded
     FlightCancellingModule,
 
     FlightLibModule.forRoot(),
     SharedModule.forRoot(),
-    RouterModule.forRoot(APP_ROUTES, { relativeLinkResolution: 'legacy' }),
+    RouterModule.forRoot(APP_ROUTES, {
+      preloadingStrategy: PreloadAllModules,
+      relativeLinkResolution: 'legacy'
+    }),
 
     LoggerModule.forRoot({ enableDebug: true, logFormatterType: CustomLogFormatterService }),
 
