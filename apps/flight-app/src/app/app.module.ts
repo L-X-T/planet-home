@@ -14,6 +14,8 @@ import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SharedModule } from './shared/shared.module';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { FlightLookaheadComponent } from './flight-lookahead/flight-lookahead.component';
 
 import { LoggerModule } from '@flight-workspace/logger-lib';
 import { CustomLogFormatterService } from './shared/custom-log-formatter.service';
@@ -22,9 +24,10 @@ import { CustomLogFormatterService } from './shared/custom-log-formatter.service
   imports: [
     BrowserModule,
     HttpClientModule,
-    FlightBookingModule,
-
     BrowserAnimationsModule,
+    ReactiveFormsModule,
+
+    FlightBookingModule,
     FlightCancellingModule,
 
     FlightLibModule.forRoot(),
@@ -33,7 +36,7 @@ import { CustomLogFormatterService } from './shared/custom-log-formatter.service
 
     LoggerModule.forRoot({ enableDebug: true, logFormatterType: CustomLogFormatterService })
   ],
-  declarations: [AppComponent, SidebarComponent, NavbarComponent, HomeComponent, BasketComponent],
+  declarations: [AppComponent, SidebarComponent, NavbarComponent, HomeComponent, BasketComponent, FlightLookaheadComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
